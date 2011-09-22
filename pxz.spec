@@ -3,13 +3,14 @@ Summary:	Parallel LZMA compressor using XZ
 #Summary(pl.UTF-8):	-
 Name:		pxz
 Version:	4.999.9
-Release:	0.%{snap}.1
+Release:	0.%{snap}.2
 License:	GPL v2
 Group:		Applications/File
 #Source0:	http://jnovy.fedorapeople.org/pxz/%{name}-%{version}beta.%{snap}git.tar.xz
 Source0:	%{name}-%{version}beta.%{snap}git.tar.xz
 # Source0-md5:	734645e5f147678fe77e66db2a579360
 URL:		http://jnovy.fedorapeople.org/pxz
+BuildRequires:	libgomp-devel
 BuildRequires:	xz-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -26,7 +27,7 @@ compression time.
 
 %build
 %{__make} \
-	CFLAGS="%{rpmcflags} -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE" \
+	CFLAGS="%{rpmcflags} -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -fopenmp" \
 	LDFLAGS="%{rpmldflags} -llzma"
 
 %install
